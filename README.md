@@ -60,4 +60,4 @@ Everything is setup, you just need to choose between DLL or EXE.
 
 ## 🧪 Demonstration :
 
-https://github.com/adamhlt/D3D11-Overlay-ImGui/assets/48086737/aca81505-8804-4b14-8402-b1e4ebb91fc5
+[Demo](https://github.com/adamhlt/D3D11-Overlay-ImGui/assets/48086737/1afe86bb-d1e7-4b09-a6dc-4c153770bfe5)

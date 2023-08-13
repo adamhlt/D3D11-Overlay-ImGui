@@ -25,6 +25,13 @@ You can easily use it as a DLL for internal cheat and EXE for external. Everythi
 
 This project works in x86 and x64, DLL and EXE.
 
+#### Features :
+
+- Hide your cheats from OBS or any window capture app.
+- Create cheat with ImGui on games that don't use DirectX.
+- Allow creation of internal / external cheats.
+- Easy to build, everything is setup.
+
 #### Used librairies :
 
 - [DirectX SDK](https://www.microsoft.com/en-us/download/details.aspx?id=6812)

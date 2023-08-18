@@ -121,7 +121,7 @@ void UI::Render()
 {
     ImGui_ImplWin32_EnableDpiAwareness();
 
-    WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(nullptr), nullptr, nullptr, nullptr, nullptr, _T("D3D11 Overlay ImGui"), nullptr };
+    WNDCLASSEX wc;
 
     wc.cbClsExtra = NULL;
     wc.cbSize = sizeof(WNDCLASSEX);

@@ -2,6 +2,7 @@
 #define DRAWING_H
 
 #include "pch.h"
+#include "UI.h"
 
 class Drawing
 {
@@ -10,9 +11,9 @@ private:
 	static ImVec2 vWindowSize;
 	static ImGuiWindowFlags WindowFlags;
 	static bool bDraw;
+	static UI::WindowItem lpSelectedWindow;
 
 public:
-	static void Active();
 	static bool isActive();
 	static void Draw();
 };

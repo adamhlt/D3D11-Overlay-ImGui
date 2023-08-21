@@ -253,7 +253,6 @@ void UI::Render()
             const float clear_color_with_alpha[4] = { clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w };
             pd3dDeviceContext->OMSetRenderTargets(1, &pMainRenderTargetView, nullptr);
             pd3dDeviceContext->ClearRenderTargetView(pMainRenderTargetView, clear_color_with_alpha);
-            ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
             pSwapChain->Present(1, 0);
 

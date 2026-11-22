@@ -4,10 +4,10 @@
 
 **A DirectX 11 overlay built with ImGui, as an EXE or a DLL (x86 / x64).**
 
-<img src="https://img.shields.io/badge/language-C%2B%2B-16171C?style=for-the-badge" alt="C++">
-<img src="https://img.shields.io/badge/platform-Windows-16171C?style=for-the-badge" alt="Windows">
-<img src="https://img.shields.io/badge/arch-x86%20%7C%20x64-16171C?style=for-the-badge" alt="x86 | x64">
-<a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL%20v3-16171C?style=for-the-badge" alt="License: GPL v3"></a>
+![Language](https://img.shields.io/badge/C%2B%2B-16171C?logo=cplusplus)
+![Platform](https://img.shields.io/badge/Windows-16171C)
+![Arch](https://img.shields.io/badge/x86%20%7C%20x64-16171C)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-16171C)](LICENSE)
 
 </div>
 

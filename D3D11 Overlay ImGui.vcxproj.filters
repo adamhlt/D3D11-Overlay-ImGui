@@ -1,87 +1,96 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Fichiers sources">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="src">
+      <UniqueIdentifier>{4858ce26-7f83-48d6-a855-7e176774131b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="vendor">
+      <UniqueIdentifier>{6ce37f75-d0cc-4370-b206-6b40b65df5c7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers de ressources">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\ImGui">
-      <UniqueIdentifier>{47220010-9dac-481f-9573-fbd12a786b28}</UniqueIdentifier>
+    <Filter Include="vendor\imgui">
+      <UniqueIdentifier>{e362773c-7ce4-4b7c-a6a5-bff8c0f652dd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\pch.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="src\Drawing.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\UI.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="src\Overlay.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ProcessUtils.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindowTracker.h">
+      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="vendor\imgui\imconfig.h">
-      <Filter>Fichiers d%27en-tête\ImGui</Filter>
+      <Filter>vendor\imgui</Filter>
     </ClInclude>
     <ClInclude Include="vendor\imgui\imgui.h">
-      <Filter>Fichiers d%27en-tête\ImGui</Filter>
+      <Filter>vendor\imgui</Filter>
     </ClInclude>
     <ClInclude Include="vendor\imgui\imgui_impl_dx11.h">
-      <Filter>Fichiers d%27en-tête\ImGui</Filter>
+      <Filter>vendor\imgui</Filter>
     </ClInclude>
     <ClInclude Include="vendor\imgui\imgui_impl_win32.h">
-      <Filter>Fichiers d%27en-tête\ImGui</Filter>
+      <Filter>vendor\imgui</Filter>
     </ClInclude>
     <ClInclude Include="vendor\imgui\imgui_internal.h">
-      <Filter>Fichiers d%27en-tête\ImGui</Filter>
+      <Filter>vendor\imgui</Filter>
     </ClInclude>
     <ClInclude Include="vendor\imgui\imstb_rectpack.h">
-      <Filter>Fichiers d%27en-tête\ImGui</Filter>
+      <Filter>vendor\imgui</Filter>
     </ClInclude>
     <ClInclude Include="vendor\imgui\imstb_textedit.h">
-      <Filter>Fichiers d%27en-tête\ImGui</Filter>
+      <Filter>vendor\imgui</Filter>
     </ClInclude>
     <ClInclude Include="vendor\imgui\imstb_truetype.h">
-      <Filter>Fichiers d%27en-tête\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Drawing.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>vendor\imgui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Drawing.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Overlay.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ProcessUtils.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WindowTracker.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="src\main.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="vendor\imgui\imgui.cpp">
-      <Filter>Fichiers d%27en-tête\ImGui</Filter>
+      <Filter>vendor\imgui</Filter>
     </ClCompile>
     <ClCompile Include="vendor\imgui\imgui_demo.cpp">
-      <Filter>Fichiers d%27en-tête\ImGui</Filter>
+      <Filter>vendor\imgui</Filter>
     </ClCompile>
     <ClCompile Include="vendor\imgui\imgui_draw.cpp">
-      <Filter>Fichiers d%27en-tête\ImGui</Filter>
+      <Filter>vendor\imgui</Filter>
     </ClCompile>
     <ClCompile Include="vendor\imgui\imgui_impl_dx11.cpp">
-      <Filter>Fichiers d%27en-tête\ImGui</Filter>
+      <Filter>vendor\imgui</Filter>
     </ClCompile>
     <ClCompile Include="vendor\imgui\imgui_impl_win32.cpp">
-      <Filter>Fichiers d%27en-tête\ImGui</Filter>
+      <Filter>vendor\imgui</Filter>
     </ClCompile>
     <ClCompile Include="vendor\imgui\imgui_tables.cpp">
-      <Filter>Fichiers d%27en-tête\ImGui</Filter>
+      <Filter>vendor\imgui</Filter>
     </ClCompile>
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp">
-      <Filter>Fichiers d%27en-tête\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UI.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Drawing.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>vendor\imgui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

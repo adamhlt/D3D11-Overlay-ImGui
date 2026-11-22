@@ -136,6 +136,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Drawing.h" />
+    <ClInclude Include="src\Overlay.h" />
+    <ClInclude Include="src\ProcessUtils.h" />
+    <ClInclude Include="src\Renderer.h" />
+    <ClInclude Include="src\WindowTracker.h" />
     <ClInclude Include="vendor\imgui\imconfig.h" />
     <ClInclude Include="vendor\imgui\imgui.h" />
     <ClInclude Include="vendor\imgui\imgui_impl_dx11.h" />
@@ -144,20 +148,23 @@
     <ClInclude Include="vendor\imgui\imstb_rectpack.h" />
     <ClInclude Include="vendor\imgui\imstb_textedit.h" />
     <ClInclude Include="vendor\imgui\imstb_truetype.h" />
-    <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\UI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Drawing.cpp" />
+    <ClCompile Include="src\Overlay.cpp" />
+    <ClCompile Include="src\ProcessUtils.cpp" />
+    <ClCompile Include="src\Renderer.cpp" />
+    <ClCompile Include="src\WindowTracker.cpp" />
+    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="vendor\imgui\imgui.cpp" />
-    <ClCompile Include="vendor\imgui\imgui_demo.cpp" />
+    <ClCompile Include="vendor\imgui\imgui_demo.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="vendor\imgui\imgui_draw.cpp" />
     <ClCompile Include="vendor\imgui\imgui_impl_dx11.cpp" />
     <ClCompile Include="vendor\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="vendor\imgui\imgui_tables.cpp" />
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\UI.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

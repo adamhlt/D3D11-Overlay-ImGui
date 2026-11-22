@@ -1,21 +1,10 @@
-#ifndef DRAWING_H
-#define DRAWING_H
+#pragma once
 
-#include "pch.h"
-#include "UI.h"
-
-class Drawing
+/**
+    ImGui content of the overlay: this is where you create your own menu.
+**/
+namespace Drawing
 {
-private:
-	static LPCSTR lpWindowName;
-	static ImVec2 vWindowSize;
-	static ImGuiWindowFlags WindowFlags;
-	static bool bDraw;
-	static UI::WindowItem lpSelectedWindow;
-
-public:
-	static bool isActive();
-	static void Draw();
-};
-
-#endif
+    bool IsActive();
+    void Draw();
+}

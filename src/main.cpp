@@ -1,29 +1,40 @@
-#include "UI.h"
+#include "Overlay.h"
 
 #ifdef _WINDLL
 
-HANDLE hCurrentUIThread = nullptr;
+namespace
+{
+    HANDLE hOverlayThread = nullptr;
+}
 
-BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved)
+BOOL WINAPI DllMain(const HINSTANCE hinstDLL, const DWORD fdwReason, const LPVOID lpReserved)
 {
     if (fdwReason == DLL_PROCESS_ATTACH)
     {
         DisableThreadLibraryCalls(hinstDLL);
-        UI::hCurrentModule = hinstDLL;
-        hCurrentUIThread = CreateThread(nullptr, NULL, (LPTHREAD_START_ROUTINE)UI::Render, nullptr, NULL, nullptr);
+        Overlay::SetModule(hinstDLL);
+        hOverlayThread = CreateThread(nullptr, 0, Overlay::ThreadMain, nullptr, 0, nullptr);
     }
 
     if (fdwReason == DLL_PROCESS_DETACH)
-        TerminateThread(hCurrentUIThread, 0);
+    {
+        // The overlay unloads itself when it ends. Only stop the thread if the DLL
+        // is unloaded from the outside while the overlay is still running.
+        if (lpReserved == nullptr && hOverlayThread != nullptr && Overlay::IsRunning())
+            TerminateThread(hOverlayThread, 0);
+
+        if (hOverlayThread != nullptr)
+            CloseHandle(hOverlayThread);
+    }
 
     return TRUE;
 }
 
 #else
 
-int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nShowCmd)
+int WINAPI wWinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPWSTR, _In_ int)
 {
-    UI::Render();
+    Overlay::Run();
 
     return 0;
 }

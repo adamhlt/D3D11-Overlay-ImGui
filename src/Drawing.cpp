@@ -1,70 +1,87 @@
 #include "Drawing.h"
+#include "WindowTracker.h"
 
-LPCSTR Drawing::lpWindowName = "D3D11 Overlay ImGui";
-ImVec2 Drawing::vWindowSize = { 350, 75 };
-ImGuiWindowFlags Drawing::WindowFlags = 0;
-bool Drawing::bDraw = true;
-UI::WindowItem Drawing::lpSelectedWindow = { nullptr, "", "" };
+#include <Windows.h>
+#include <vector>
 
-bool Drawing::isActive()
+#include "imgui.h"
+
+namespace
 {
-	return bDraw == true;
+    constexpr const char* kWindowName = "D3D11 Overlay ImGui";
+    const ImVec2 kWindowSize = { 350, 75 };
+    constexpr ImGuiWindowFlags kWindowFlags = 0;
+
+    bool bDraw = true;
+    WindowTracker::WindowItem selectedWindow;
+
+    /**
+        @brief : Draw the window picker.
+                 Should be drawn only when the overlay is build as an EXE.
+    **/
+    void DrawWindowPicker()
+    {
+        std::vector<WindowTracker::WindowItem> windowList;
+        WindowTracker::GetAllWindows(windowList);
+
+        if (windowList.empty())
+            return;
+
+        ImGui::SetNextWindowSize({ 400, 100 }, ImGuiCond_Once);
+        ImGui::SetNextWindowBgAlpha(1.0f);
+
+        ImGui::Begin("Overlay Target Chooser", &bDraw, kWindowFlags);
+        {
+            if (ImGui::BeginCombo("##combo", selectedWindow.sTitle.c_str()))
+            {
+                for (const auto& item : windowList)
+                {
+                    const bool bSelected = selectedWindow.sTitle == item.sTitle;
+                    if (ImGui::Selectable(item.sTitle.c_str(), bSelected))
+                        selectedWindow = item;
+                    if (bSelected)
+                        ImGui::SetItemDefaultFocus();
+                }
+                ImGui::EndCombo();
+            }
+            ImGui::NewLine();
+            if (ImGui::Button("Start Overlay") && selectedWindow.hWindow != nullptr)
+                WindowTracker::SetTarget(selectedWindow.hWindow);
+        }
+        ImGui::End();
+    }
+
+    /**
+        @brief : Draw your own menu here.
+    **/
+    void DrawMenu()
+    {
+        ImGui::SetNextWindowSize(kWindowSize, ImGuiCond_Once);
+        ImGui::SetNextWindowBgAlpha(1.0f);
+        ImGui::Begin(kWindowName, &bDraw, kWindowFlags);
+        {
+            ImGui::Text("Create your own menu.");
+            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+        }
+        ImGui::End();
+    }
+}
+
+bool Drawing::IsActive()
+{
+    return bDraw;
 }
 
 void Drawing::Draw()
 {
-	if (isActive())
-	{
-		// Draw the window picker.
-		// Should be drawed only when the overlay is build as an EXE.
-		if (!UI::IsWindowTargeted())
-		{
-			std::vector<UI::WindowItem> WindowList;
-			UI::GetAllWindow(&WindowList);
+    if (IsActive())
+    {
+        if (!WindowTracker::IsTargeted())
+            DrawWindowPicker();
+        else
+            DrawMenu();
+    }
 
-			if (WindowList.empty())
-				return;
-
-			ImGui::SetNextWindowSize({ 400, 100 }, ImGuiCond_Once);
-			ImGui::SetNextWindowBgAlpha(1.0f);
-
-			ImGui::Begin("Overlay Target Chooser", &bDraw, WindowFlags);
-			{
-				if (ImGui::BeginCombo("##combo", lpSelectedWindow.CurrentWindowTitle))
-				{
-					for (const auto& item : WindowList)
-					{
-						const bool is_selected = (strcmp(lpSelectedWindow.CurrentWindowTitle, item.CurrentWindowTitle) == 0);
-						if (ImGui::Selectable(item.CurrentWindowTitle, is_selected))
-							lpSelectedWindow = item;
-						if (is_selected)
-							ImGui::SetItemDefaultFocus();
-					}
-					ImGui::EndCombo();
-				}
-				ImGui::NewLine();
-				if (ImGui::Button("Start Overlay"))
-				{
-					UI::SetTargetWindow(lpSelectedWindow.CurrentWindow);
-				}
-			}
-			ImGui::End();
-
-			return;
-		}
-
-		ImGui::SetNextWindowSize(vWindowSize, ImGuiCond_Once);
-		ImGui::SetNextWindowBgAlpha(1.0f);
-		ImGui::Begin(lpWindowName, &bDraw, WindowFlags);
-		{
-
-			ImGui::Text("Create your own menu.");
-
-			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-		}
-		ImGui::End();
-	}
-
-	if (GetAsyncKeyState(VK_INSERT) & 1)
-		bDraw = !bDraw;
+    if (GetAsyncKeyState(VK_INSERT) & 1)
+        bDraw = !bDraw;
 }

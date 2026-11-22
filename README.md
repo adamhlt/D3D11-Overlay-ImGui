@@ -1,69 +1,82 @@
-```
-      ____ _____ ____ ______   ____                  __               ____          ______      _ 
-     / __ \__  // __ <  <  /  / __ \_   _____  _____/ /___ ___  __   /  _/___ ___  / ____/_  __(_)
-    / / / //_ </ / / / // /  / / / / | / / _ \/ ___/ / __ `/ / / /   / // __ `__ \/ / __/ / / / /
-   / /_/ /__/ / /_/ / // /  / /_/ /| |/ /  __/ /  / / /_/ / /_/ /  _/ // / / / / / /_/ / /_/ / /
-  /_____/____/_____/_//_/   \____/ |___/\___/_/  /_/\__,_/\__, /  /___/_/ /_/ /_/\____/\__,_/_/
-                                                         /____/                             
+<div align="center">
 
-                              
-                                D3D11 Overlay with ImGui (x86 / x64)
-                                   EXE / DLL DirectX 11 Overlay
-```
-<p align="center">
-    <img src="https://img.shields.io/badge/language-C%2B%2B-%23f34b7d.svg?style=for-the-badge&logo=appveyor" alt="C++">
-    <img src="https://img.shields.io/badge/platform-Windows-0078d7.svg?style=for-the-badge&logo=appveyor" alt="Windows">
-    <img src="https://img.shields.io/badge/arch-x86-red.svg?style=for-the-badge&logo=appveyor" alt="x86">
-    <img src="https://img.shields.io/badge/arch-x64-green.svg?style=for-the-badge&logo=appveyor" alt="x64">
-</p>
+# D3D11 Overlay ImGui
 
-## :open_book: Project Overview :
+**A DirectX 11 overlay built with ImGui, as an EXE or a DLL (x86 / x64).**
 
-D3D11 Overlay ImGui use D3D11 to create a DirectX window with ImGui, and this allow you to draw on top of games / application.
+<img src="https://img.shields.io/badge/language-C%2B%2B-16171C?style=for-the-badge" alt="C++">
+<img src="https://img.shields.io/badge/platform-Windows-16171C?style=for-the-badge" alt="Windows">
+<img src="https://img.shields.io/badge/arch-x86%20%7C%20x64-16171C?style=for-the-badge" alt="x86 | x64">
+<a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL%20v3-16171C?style=for-the-badge" alt="License: GPL v3"></a>
 
-You can easily use it as a DLL for internal cheat and EXE for external. Everything is setup you just need to choose between DLL or EXE. D3D11 Overlay ImGui create his own window, if you use it as a DLL you main process don't need to use DirectX.
+</div>
 
-This project works in x86 and x64, DLL and EXE.
+---
 
-#### Features :
+D3D11 Overlay ImGui creates its own transparent, topmost window and renders an [ImGui](https://github.com/ocornut/imgui) interface on top of a game or an application. The overlay follows the target window (position, size and focus), so it works even if the target does not use DirectX.
 
-- Hide your cheats from OBS or any window capture app.
-- Create cheat with ImGui on games that don't use DirectX.
-- Allow creation of internal / external cheats.
-- Easy to build, everything is setup.
+The same code base builds as an EXE for an external overlay or as a DLL for an internal one, in x86 and x64. The overlay window is hidden from OBS and other window capture applications.
 
-#### Used librairies :
+### OVERLAY WINDOW PICKER (EXE)
+
+[Demo](https://github.com/adamhlt/D3D11-Overlay-ImGui/assets/48086737/5cb30859-7157-44ea-ba5c-9dad5ec66980)
+
+### OBS DEMO (DLL)
+
+[Demo](https://github.com/adamhlt/D3D11-Overlay-ImGui/assets/48086737/1afe86bb-d1e7-4b09-a6dc-4c153770bfe5)
+
+## Features
+
+**Overlay:**
+- Transparent and topmost window that follows the target window.
+- Click-through when the menu is hidden or when the target is not focused.
+- Hidden from OBS and window capture applications.
+
+**EXE:**
+- Window picker to choose the application to draw on.
+- Exits when the target window is closed.
+
+**DLL:**
+- Targets the main window of the host process automatically.
+- The host process does not need to use DirectX.
+- Unloads itself when the overlay is closed.
+
+## Usage
+
+Write your menu in `DrawMenu()` (`src/Drawing.cpp`), then build as an EXE or a DLL.
+
+| Key      | Action                   |
+|----------|--------------------------|
+| `INSERT` | Show / hide the menu     |
+| `END`    | Close the overlay        |
+
+- **EXE**: run it, pick the target window in the list and click **Start Overlay**.
+- **DLL**: inject it into the target process, the overlay starts on the main window of the process.
+
+> **Note**
+> The ImGui demo window source (`imgui_demo.cpp`) is only compiled in Debug.
+
+## Build
+
+> **Note**
+> Make sure that `DXSDK_DIR` is declared in your environment variables, it is set by the [DirectX SDK](https://www.microsoft.com/en-us/download/details.aspx?id=6812) installer.
+
+1. Open `D3D11 Overlay ImGui.sln` in Visual Studio (v143 toolset).
+2. Build in Debug or Release, for x86 or x64.
+
+To build a DLL, set **Configuration Type** to **Dynamic Library (.dll)** in the project properties (**General**).
+
+- **Output:** `D3D11 Overlay ImGui.exe` or `D3D11 Overlay ImGui.dll` in the `Debug` / `Release` (x86) or `x64\Debug` / `x64\Release` folder.
+- **Architecture:** the DLL or EXE must match the architecture of the target process.
+
+> **Warning**
+> If you get a linking error, make sure that the DirectX SDK is correctly installed.
+
+## Libraries
 
 - [DirectX SDK](https://www.microsoft.com/en-us/download/details.aspx?id=6812)
 - [ImGui](https://github.com/ocornut/imgui)
 
-## :rocket: Getting Started
+## License
 
-> **Note** <br>
-> Make sure that **DXSDK_DIR** is declared in your environment variables.
-
-To see your environment variables :
-
-> **Settings --> System --> About --> System Advanced Settings --> Environment Variables**
-
-### Visual Studio :
-
-1. Open the solution file (.sln).
-2. Build the project in Release (x86 or x64)
-
-Every configuration in x86 / x64 (Debug and Realese) are already configured with librairies and includes.
-
-Everything is setup, you just need to choose between DLL or EXE.
-
-> **Warning** <br>
-> If you have any linking error when compiling make sure that you have correctly install DirectX SDK.
-
-## 🧪 Demonstration :
-
-**DLL - OBS DEMO**
-
-[Demo](https://github.com/adamhlt/D3D11-Overlay-ImGui/assets/48086737/1afe86bb-d1e7-4b09-a6dc-4c153770bfe5)
-
-**EXE - Overlay Window Picker**
-
-[Demo](https://github.com/adamhlt/D3D11-Overlay-ImGui/assets/48086737/5cb30859-7157-44ea-ba5c-9dad5ec66980)
+Released under the [GNU GPLv3](LICENSE).
